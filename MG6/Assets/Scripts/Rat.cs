@@ -14,7 +14,7 @@ public class Rat : MonoBehaviour
         Color.red,
         Color.blue
     };
-    private int _colorIndex;
+    private int _colorIndex = 0;
 
     // ------------------------------------------------------------------------
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,22 +30,26 @@ public class Rat : MonoBehaviour
             {
                 if (_colorIndex == 2)
                 {
-                    _colorIndex = 0;
-
-                } else
-                    _colorIndex++;
+                    SpawnExplosion(_colors[_colorIndex]);
+                     _colorIndex = 0;
+                } else 
                 {
                 
-                SpawnExplosion(_colors[_colorIndex]);
+                    SpawnExplosion(_colors[_colorIndex]);
+                    _colorIndex += 1;
+                }
+                
                 for ( int i = 0; i < _spawnAmount ; i++)
                 {
                     SpawnSmallRat();
 
                 }
                 gameObject.transform.localScale *= _shrinkAmount;
-                }
-        
             }
+        
+    }
+            
+        
         // STEP 3
         // Additionally, call SpawnExplosion(), and pass in a different color
         //      every time.
@@ -57,7 +61,7 @@ public class Rat : MonoBehaviour
 
 
         // STEP 2 -------------------------------------------------------------
-    }
+    
 
     // ------------------------------------------------------------------------
     private void SpawnExplosion(Color color)
