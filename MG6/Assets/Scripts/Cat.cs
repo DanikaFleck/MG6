@@ -65,7 +65,15 @@ public class Cat : MonoBehaviour
         // You might want to check the Rigidbody2D scripting documentation
         //      for a useful variable :)
         
+        if ( _isGrounded == false && _rigidbody.linearVelocity.y > 0)
+        {
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            
 
+        } else
+        {
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
+        }
         
         // STEP 1 -------------------------------------------------------------
     }
